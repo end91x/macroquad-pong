@@ -14,6 +14,8 @@ Collision Detection: The ball changes direction upon hitting paddles or screen b
 
 Simple Graphics: Utilizes basic shapes and colors for a clear and visually appealing interface.
 
+Simple Sound system: Background music and sound effects.
+
 ## Technical Details
 
 Language and Framework: Rust with Macroquad.
@@ -21,6 +23,8 @@ Language and Framework: Rust with Macroquad.
 Paddle and Ball Mechanics: Paddles and the ball are defined with their respective properties and behaviors. Paddles can move vertically within the screen limits, and the ball's movement includes bouncing off the screen edges and paddles.
 
 Game Loop: The main game loop handles input processing, game logic updates, and rendering.
+
+FPS: Currently 60 but can be changed.
 
 ## Code Structure
 
@@ -30,7 +34,7 @@ paddle.rs: Defines the Paddle struct and its methods for movement and drawing.
 
 ball.rs: Defines the Ball struct with methods for movement, drawing, collision detection, and resetting.
 
-constants.rs: Stores all game-related constants like dimensions and speeds.
+constants.rs: Stores all game-related constants like dimensions, speeds and colors.
 
 ## Dependencies
 
