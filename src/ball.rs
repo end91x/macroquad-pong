@@ -8,7 +8,7 @@ pub struct Ball {
     /// The circle that represents the ball
     pub circle: Circle,
     /// The direction of the ball
-    dir: Vec2,
+    pub dir: Vec2,
 }
 
 impl Ball {
@@ -34,13 +34,17 @@ impl Ball {
         if self.circle.y - BALL_RADIUS <= 0. || self.circle.y >= screen_height() - BALL_RADIUS {
             self.dir.y = -self.dir.y;
         }
+
+        // Clamp the speed of the ball
+        self.dir.x = self.dir.x.clamp(-MAX_BALL_SPEED, MAX_BALL_SPEED);
+        self.dir.y = self.dir.y.clamp(-MAX_BALL_SPEED, MAX_BALL_SPEED);
     }
 
     /// Generates a random direction for the ball to move in
     ///
     /// # Returns
     ///
-    /// * A vector that represents the direction the ball should move in
+    /// * A Vec2 that represents the direction the ball should move in
     fn random_direction() -> Vec2 {
         let mut rng: ThreadRng = thread_rng();
         let mut dir_x: f32;
@@ -64,8 +68,8 @@ impl Ball {
     ///
     /// # Arguments
     ///
-    /// * `paddle_1` - The first paddle
-    /// * `paddle_2` - The second paddle
+    /// * `paddle_1` - The first paddle rect
+    /// * `paddle_2` - The second paddle rect
     pub fn collision_with_paddles(&mut self, paddle_1: &Rect, paddle_2: &Rect) {
         let ball_rect: Rect = Rect::new(
             self.circle.x - BALL_RADIUS,
