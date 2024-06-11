@@ -145,7 +145,3 @@ fn draw_field() {
 fn win_condition(scores: &(u8, u8)) -> bool {
     scores.0 >= 10 || scores.1 >= 10
 }
-
-fn hello_there() {
-    unimplemented!();
-}
