@@ -55,6 +55,7 @@ async fn main() {
             scores.0 += 1;
         }
 
+        // If either player has won the game, break the loop and exit the game
         if win_condition(&scores) {
             break;
         }
@@ -132,6 +133,15 @@ fn draw_field() {
     draw_circle_lines(screen_width() / 2., screen_height() / 2., 100., 1., WHITE);
 }
 
+/// Checks if either player has won the game
+///
+/// # Arguments
+///
+/// * `scores` - The scores to check (tuple of u8)
+///
+/// # Returns
+///
+/// * `bool` - Whether either player has won the game
 fn win_condition(scores: &(u8, u8)) -> bool {
     scores.0 >= 10 || scores.1 >= 10
 }
