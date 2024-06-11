@@ -3,10 +3,12 @@ use macroquad::prelude::*;
 
 mod ball;
 mod constants;
+mod egui_menu;
 mod paddle;
 
 use crate::ball::Ball;
 use crate::constants::*;
+use crate::egui_menu::init_egui;
 use crate::paddle::Paddle;
 
 /// The main function
@@ -50,7 +52,7 @@ async fn main() {
 
     // Play the background music
     play_sound(
-        &bg_music,
+        bg_music,
         PlaySoundParams {
             looped: true,
             volume: 1.,
@@ -59,6 +61,9 @@ async fn main() {
 
     // Main game loop
     loop {
+        // Initialize egui debug menu
+        init_egui(&mut ball);
+
         // Update game logic
         paddle_1.movement(KeyCode::W, KeyCode::S);
         paddle_2.movement(KeyCode::Up, KeyCode::Down);
@@ -87,9 +92,12 @@ async fn main() {
         draw_scores(&font, &scores);
         draw_field();
 
+        // Draw egui debug menu
+        egui_macroquad::draw();
+
         next_frame().await; // Draw the next frame
 
-        // Delay the game to make it run at the target fps
+        // Post process (delay the game to make it run at the target fps)
         if frame_time < target_frame_time {
             let delay_duration = (target_frame_time - frame_time) * 1000.;
             std::thread::sleep(std::time::Duration::from_millis(delay_duration as u64));
@@ -121,7 +129,7 @@ fn draw_scores(font: &Font, scores: &(u8, u8)) {
         100.,
         TextParams {
             font_size: 70,
-            font: Some(font),
+            font: *font,
             ..Default::default()
         },
     );
@@ -131,7 +139,7 @@ fn draw_scores(font: &Font, scores: &(u8, u8)) {
         100.,
         TextParams {
             font_size: 70,
-            font: Some(font),
+            font: *font,
             ..Default::default()
         },
     );
