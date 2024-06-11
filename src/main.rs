@@ -1,3 +1,4 @@
+use macroquad::audio::{load_sound, play_sound, PlaySoundParams, Sound};
 use macroquad::prelude::*;
 
 mod ball;
@@ -13,6 +14,15 @@ use crate::paddle::Paddle;
 async fn main() {
     // Load the font
     let font: Font = load_ttf_font("./res/Roboto-Black.ttf").await.unwrap();
+
+    // Load the background music
+    let bg_music: Sound = load_sound("./assets/sounds/bg_music.wav").await.unwrap();
+
+    // Set target fps
+    let target_frame_time: f32 = 1. / 60.;
+
+    // Get the time it takes to render a frame
+    let frame_time = get_frame_time();
 
     // Initialize the scores
     let mut scores: (u8, u8) = (0, 0);
@@ -38,6 +48,15 @@ async fn main() {
         BALL_RADIUS,
     ));
 
+    // Play the background music
+    play_sound(
+        &bg_music,
+        PlaySoundParams {
+            looped: true,
+            volume: 1.,
+        },
+    );
+
     // Main game loop
     loop {
         // Update game logic
@@ -46,7 +65,7 @@ async fn main() {
         ball.movement();
         ball.collision_with_paddles(&paddle_1.rect, &paddle_2.rect);
 
-        // Check if the ball goes out of the screen (horizontal) and reset ball
+        // Check if the ball goes out of the screen (horizontally) and reset ball
         if ball.circle.x + BALL_RADIUS <= 0. {
             ball.reset();
             scores.1 += 1;
@@ -68,7 +87,13 @@ async fn main() {
         draw_scores(&font, &scores);
         draw_field();
 
-        next_frame().await;
+        next_frame().await; // Draw the next frame
+
+        // Delay the game to make it run at the target fps
+        if frame_time < target_frame_time {
+            let delay_duration = (target_frame_time - frame_time) * 1000.;
+            std::thread::sleep(std::time::Duration::from_millis(delay_duration as u64));
+        }
     }
 }
 
@@ -143,5 +168,5 @@ fn draw_field() {
 ///
 /// * `bool` - Whether either player has won the game
 fn win_condition(scores: &(u8, u8)) -> bool {
-    scores.0 >= 10 || scores.1 >= 10
+    scores.0 >= 3 || scores.1 >= 3
 }
