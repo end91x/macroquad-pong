@@ -24,7 +24,7 @@ Paddle and Ball Mechanics: Paddles and the ball are defined with their respectiv
 
 Game Loop: The main game loop handles input processing, game logic updates, and rendering.
 
-FPS: Currently 60 but can be changed.
+FPS: Currently set to 60 but can be changed.
 
 ## Code Structure
 
