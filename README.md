@@ -57,4 +57,5 @@ sounds.rs: Defines sound system.
 
 3. egui_macroquad: For adding gui debug menu. **NOTE**: You have to downgrade macroquad version to 3.x since egui_macroquad apparently does not seem to work with 4.x version of macroquad.
    
-!["game_screenshot"](https://imgur.com/a/6kWcGGW)
+![pong_1](https://github.com/end91x/macroquad-pong/assets/160602132/3efdce82-3d86-4ea8-a183-e74cb5dbbd26)
+
