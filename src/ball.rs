@@ -1,8 +1,9 @@
 use ::rand::prelude::*;
-use macroquad::audio::{play_sound_once, Sound};
+use macroquad::audio::Sound;
 use macroquad::prelude::*;
 
 use crate::constants::*;
+use crate::sound::play_collision_sound;
 
 /// Represents a ball
 pub struct Ball {
@@ -32,7 +33,9 @@ impl Ball {
         self.circle.y += self.dir.y * BALL_SPEED;
 
         // Bounce the ball off the top or bottom of the screen
-        if self.circle.y - BALL_RADIUS <= 0. || self.circle.y >= screen_height() - BALL_RADIUS {
+        if self.circle.y - BALL_RADIUS <= 0. + 32.
+            || self.circle.y >= screen_height() - BALL_RADIUS - 32.
+        {
             self.dir.y = -self.dir.y;
         }
 
@@ -71,7 +74,7 @@ impl Ball {
     ///
     /// * `paddle_1` - The first paddle rect
     /// * `paddle_2` - The second paddle rect
-    pub fn collision_with_paddles(&mut self, paddle_1: &Rect, paddle_2: &Rect, sound: Sound) {
+    pub async fn collision_with_paddles(&mut self, paddle_1: &Rect, paddle_2: &Rect, sound: Sound) {
         let ball_rect: Rect = Rect::new(
             self.circle.x - BALL_RADIUS,
             self.circle.y - BALL_RADIUS,
@@ -87,7 +90,7 @@ impl Ball {
             self.dir.y += hit_pos * PADDLE_BOUNCE_ANGLE_FACTOR;
             self.dir *= BALL_SPEED_MULTIPLIER;
             self.circle.x = paddle_1.x + paddle_1.w + BALL_RADIUS;
-            play_sound_once(sound);
+            play_collision_sound(sound).await;
         }
 
         // Check for collisions with the second paddle
@@ -98,7 +101,7 @@ impl Ball {
             self.dir.y += hit_pos * PADDLE_BOUNCE_ANGLE_FACTOR;
             self.dir *= BALL_SPEED_MULTIPLIER;
             self.circle.x = paddle_2.x - BALL_RADIUS;
-            play_sound_once(sound);
+            play_collision_sound(sound).await;
         }
     }
 
