@@ -34,10 +34,10 @@ impl Paddle {
         }
 
         // Ensure the paddle stays within the screen
-        if self.rect.y <= 0. {
-            self.rect.y = 0.;
-        } else if self.rect.y >= screen_height() - PADDLE_H {
-            self.rect.y = screen_height() - PADDLE_H;
+        if self.rect.y <= 0. + 32. {
+            self.rect.y = 0. + 32.;
+        } else if self.rect.y >= screen_height() - PADDLE_H - 32. {
+            self.rect.y = screen_height() - PADDLE_H - 32.;
         }
     }
 
