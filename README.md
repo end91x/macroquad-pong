@@ -12,7 +12,7 @@ Ball Reset: When a point is scored, the ball resets to the center with a random 
 
 Collision Detection: The ball changes direction upon hitting paddles or screen boundaries.
 
-Simple Graphics: Utilizes basic shapes and colors for a clear and visually appealing interface.
+Simple Graphics: Utilizes basic shapes, colors and usage of sprites.
 
 Simple Sound system: Background music and sound effects.
 
