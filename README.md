@@ -44,9 +44,9 @@ Simple Graphics: Utilizes basic shapes, colors and sprites.
 5. constants.rs: Stores all game-related constants like dimensions, speeds and colors.
 sounds.rs: Defines sound system.
 
-graphics.rs: Defines graphic system.
+6. graphics.rs: Defines graphic system.
 
-egui_menu.rs: Contains code for egui implementation.
+7. egui_menu.rs: Contains code for egui implementation.
 
 
 ## Dependencies
@@ -56,5 +56,3 @@ egui_menu.rs: Contains code for egui implementation.
 2. rand: For random value generation.
 
 3. egui_macroquad: For adding gui debug menu. **NOTE**: You have to downgrade macroquad version to 3.x since egui_macroquad apparently does not seem to work with 4.x version of macroquad.
-
-![](/home/dns/Desktop/pong_1.png)
