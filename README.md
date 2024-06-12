@@ -12,7 +12,7 @@ Ball Reset: When a point is scored, the ball resets to the center with a random 
 
 Collision Detection: The ball changes direction upon hitting paddles or screen boundaries.
 
-Simple Graphics: Utilizes basic shapes, colors and usage of sprites.
+Simple Graphics: Utilizes basic shapes, colors and sprites.
 
 Simple Sound system: Background music and sound effects.
 
@@ -35,6 +35,10 @@ main.rs: Contains the game loop and rendering logic.
 paddle.rs: Defines the Paddle struct and its methods for movement and drawing.
 
 ball.rs: Defines the Ball struct with methods for movement, drawing, collision detection, and resetting.
+
+sounds.rs: Defines sound system.
+
+graphics.rs: Defines graphic system.
 
 egui_menu.rs: Contains code for egui implementation.
 
