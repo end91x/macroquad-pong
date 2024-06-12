@@ -16,6 +16,8 @@ Simple Graphics: Utilizes basic shapes and colors for a clear and visually appea
 
 Simple Sound system: Background music and sound effects.
 
+Developer Tools: Basic egui integration for debugging.
+
 ## Technical Details
 
 Language and Framework: Rust with Macroquad.
