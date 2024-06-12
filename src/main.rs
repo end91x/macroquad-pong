@@ -90,11 +90,11 @@ async fn main() {
 
         // Begin drawing
         clear_background(BG_COLOR);
+        draw_field();
         paddle_1.draw();
         paddle_2.draw();
         ball.draw();
         draw_scores(&font, &scores);
-        draw_field();
 
         // Draw egui debug menu
         egui_macroquad::draw();
@@ -157,7 +157,7 @@ fn draw_field() {
         screen_width() - 0.5,
         screen_height() - 0.5,
         2.,
-        WHITE,
+        FIELD_COLOR,
     );
     draw_line(
         screen_width() / 2.,
@@ -165,9 +165,15 @@ fn draw_field() {
         screen_width() / 2.,
         screen_height(),
         1.,
-        WHITE,
+        FIELD_COLOR,
     );
-    draw_circle_lines(screen_width() / 2., screen_height() / 2., 100., 1., WHITE);
+    draw_circle_lines(
+        screen_width() / 2.,
+        screen_height() / 2.,
+        100.,
+        1.,
+        FIELD_COLOR,
+    );
 }
 
 /// Checks if either player has won the game
