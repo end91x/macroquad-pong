@@ -13,6 +13,7 @@ This Pong game is a modern implementation of the classic arcade game, developed 
 4. Collision Detection: The ball changes direction upon hitting paddles or screen boundaries.
 
 5. Simple Graphics: Utilizes basic shapes, colors and usage of sprites.
+Simple Graphics: Utilizes basic shapes, colors and sprites.
 
 6. Simple Sound system: Background music and sound effects.
 
@@ -41,6 +42,11 @@ This Pong game is a modern implementation of the classic arcade game, developed 
 4. egui_menu.rs: Contains code for egui implementation.
 
 5. constants.rs: Stores all game-related constants like dimensions, speeds and colors.
+sounds.rs: Defines sound system.
+
+graphics.rs: Defines graphic system.
+
+egui_menu.rs: Contains code for egui implementation.
 
 
 ## Dependencies
