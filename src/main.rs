@@ -6,14 +6,14 @@ mod constants;
 mod egui_menu;
 mod graphics;
 mod paddle;
-mod sound;
+mod sounds;
 
 use crate::ball::Ball;
 use crate::constants::*;
 use crate::egui_menu::init_egui;
 use crate::graphics::{draw_field, draw_scores, draw_wall};
 use crate::paddle::Paddle;
-use crate::sound::play_music;
+use crate::sounds::play_music;
 
 /// The main function
 #[macroquad::main(conf)]

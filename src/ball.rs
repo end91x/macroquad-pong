@@ -3,7 +3,7 @@ use macroquad::audio::Sound;
 use macroquad::prelude::*;
 
 use crate::constants::*;
-use crate::sound::play_collision_sound;
+use crate::sounds::play_collision_sound;
 
 /// Represents a ball
 pub struct Ball {
