@@ -1,6 +1,6 @@
 # Pong Game
 
-This Pong game is a modern implementation of the classic arcade game, developed using the Rust programming language and the Macroquad framework. It features simple gameplay where two players control paddles to hit a ball back and forth. The goal is to outmaneuver your opponent and score points by getting the ball past their paddle.
+<span style="color:blue">some *blue* This Pong game is a modern implementation of the classic arcade game, developed using the Rust programming language and the Macroquad framework. It features simple gameplay where two players control paddles to hit a ball back and forth. The goal is to outmaneuver your opponent and score points by getting the ball past their paddle.</span>
 
 ## Features
 
