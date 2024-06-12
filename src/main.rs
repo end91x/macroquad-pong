@@ -1,15 +1,19 @@
-use macroquad::audio::{load_sound, play_sound, PlaySoundParams, Sound};
+use macroquad::audio::{load_sound, Sound};
 use macroquad::prelude::*;
 
 mod ball;
 mod constants;
 mod egui_menu;
+mod graphics;
 mod paddle;
+mod sound;
 
 use crate::ball::Ball;
 use crate::constants::*;
 use crate::egui_menu::init_egui;
+use crate::graphics::{draw_field, draw_scores, draw_wall};
 use crate::paddle::Paddle;
+use crate::sound::play_music;
 
 /// The main function
 #[macroquad::main(conf)]
@@ -19,10 +23,16 @@ async fn main() {
         .await
         .unwrap();
 
-    // Load the background music
+    // Load the sounds
     let bg_music: Sound = load_sound("./assets/sounds/bg_music.wav").await.unwrap();
-
     let collision_sound: Sound = load_sound("./assets/sounds/pop3.ogg").await.unwrap();
+
+    // Load the tileset and set the filter to nearest
+    let tileset: Texture2D = load_texture("./assets/graphics/tileset.png").await.unwrap();
+    tileset.set_filter(FilterMode::Nearest);
+
+    // Define the tile rect
+    let tile_rect: Rect = Rect::new(0.0, 0.0, 32.0, 32.0);
 
     // Set target fps
     let target_frame_time: f32 = 1. / 60.;
@@ -33,7 +43,7 @@ async fn main() {
     // Initialize the scores
     let mut scores: (u8, u8) = (0, 0);
 
-    // Object initialization
+    // Player 1 object
     let mut paddle_1: Paddle = Paddle::new(Rect::new(
         10.,
         screen_height() / 2. - PADDLE_H / 2.,
@@ -41,6 +51,7 @@ async fn main() {
         PADDLE_H,
     ));
 
+    // Player 2 object
     let mut paddle_2: Paddle = Paddle::new(Rect::new(
         screen_width() - 10. - PADDLE_W,
         screen_height() / 2. - PADDLE_H / 2.,
@@ -48,6 +59,7 @@ async fn main() {
         PADDLE_H,
     ));
 
+    // Ball object
     let mut ball: Ball = Ball::new(Circle::new(
         screen_width() / 2.,
         screen_height() / 2.,
@@ -55,13 +67,7 @@ async fn main() {
     ));
 
     // Play the background music
-    play_sound(
-        bg_music,
-        PlaySoundParams {
-            looped: true,
-            volume: 0.1,
-        },
-    );
+    play_music(bg_music).await;
 
     // Main game loop
     loop {
@@ -72,7 +78,8 @@ async fn main() {
         paddle_1.movement(KeyCode::W, KeyCode::S);
         paddle_2.movement(KeyCode::Up, KeyCode::Down);
         ball.movement();
-        ball.collision_with_paddles(&paddle_1.rect, &paddle_2.rect, collision_sound);
+        ball.collision_with_paddles(&paddle_1.rect, &paddle_2.rect, collision_sound)
+            .await;
 
         // Check if the ball goes out of the screen (horizontally) and reset ball
         if ball.circle.x + BALL_RADIUS <= 0. {
@@ -91,13 +98,13 @@ async fn main() {
         // Begin drawing
         clear_background(BG_COLOR);
         draw_field();
+        draw_wall(tile_rect, tileset);
         paddle_1.draw();
         paddle_2.draw();
         ball.draw();
         draw_scores(&font, &scores);
 
-        // Draw egui debug menu
-        egui_macroquad::draw();
+        egui_macroquad::draw(); // Draw egui debug menu
 
         next_frame().await; // Draw the next frame
 
@@ -118,62 +125,6 @@ fn conf() -> Conf {
         window_resizable: false,
         ..Default::default()
     }
-}
-
-/// Draws the scores on the screen
-///
-/// # Arguments
-///
-/// * `font` - The font to use to draw the scores
-/// * `scores` - The scores to draw
-fn draw_scores(font: &Font, scores: &(u8, u8)) {
-    draw_text_ex(
-        format!("{}", scores.0).as_str(),
-        100.,
-        100.,
-        TextParams {
-            font_size: 70,
-            font: *font,
-            ..Default::default()
-        },
-    );
-    draw_text_ex(
-        format!("{}", scores.1).as_str(),
-        screen_width() - 100. - 50.,
-        100.,
-        TextParams {
-            font_size: 70,
-            font: *font,
-            ..Default::default()
-        },
-    );
-}
-
-/// Draws the field on the screen
-fn draw_field() {
-    draw_rectangle_lines(
-        0.5,
-        0.5,
-        screen_width() - 0.5,
-        screen_height() - 0.5,
-        2.,
-        FIELD_COLOR,
-    );
-    draw_line(
-        screen_width() / 2.,
-        0.,
-        screen_width() / 2.,
-        screen_height(),
-        1.,
-        FIELD_COLOR,
-    );
-    draw_circle_lines(
-        screen_width() / 2.,
-        screen_height() / 2.,
-        100.,
-        1.,
-        FIELD_COLOR,
-    );
 }
 
 /// Checks if either player has won the game
