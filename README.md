@@ -36,6 +36,8 @@ paddle.rs: Defines the Paddle struct and its methods for movement and drawing.
 
 ball.rs: Defines the Ball struct with methods for movement, drawing, collision detection, and resetting.
 
+egui_menu.rs: Contains code for egui implementation.
+
 constants.rs: Stores all game-related constants like dimensions, speeds and colors.
 
 ## Dependencies
@@ -43,5 +45,7 @@ constants.rs: Stores all game-related constants like dimensions, speeds and colo
 macroquad: For game rendering and event handling.
 
 rand: For random value generation.
+
+egui_macroquad: For adding gui debug menu. *NOTE*: You have to downgrade macroquad version to 3.x since egui_macroquad apparently does not seem to work with 4.x version of macroquad.
 
 This game is a fun project for those interested in game development with Rust and provides a base for more complex game mechanics and features.
