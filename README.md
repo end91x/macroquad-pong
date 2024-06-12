@@ -56,3 +56,5 @@ sounds.rs: Defines sound system.
 2. rand: For random value generation.
 
 3. egui_macroquad: For adding gui debug menu. **NOTE**: You have to downgrade macroquad version to 3.x since egui_macroquad apparently does not seem to work with 4.x version of macroquad.
+   
+!["game_screenshot"](https://imgur.com/a/6kWcGGW)
