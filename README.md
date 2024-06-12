@@ -2,7 +2,6 @@
 
 This Pong game is a modern implementation of the classic arcade game, developed using the Rust programming language and the Macroquad framework. It features simple gameplay where two players control paddles to hit a ball back and forth. The goal is to outmaneuver your opponent and score points by getting the ball past their paddle.
 
-
 ## Features
 
 1. Two Player Mode: Control paddles using keyboard inputs (W and S for the left paddle, Up and Down arrows for the right paddle).
@@ -20,7 +19,6 @@ Simple Graphics: Utilizes basic shapes, colors and sprites.
 
 7. Developer Tools: Basic egui integration for debugging.
 
-
 ## Technical Details
 
 1. Language and Framework: Rust with Macroquad.
@@ -30,7 +28,6 @@ Simple Graphics: Utilizes basic shapes, colors and sprites.
 3. Game Loop: The main game loop handles input processing, game logic updates, and rendering.
 
 4. FPS: Currently set to 60 but can be changed.
-
 
 ## Code Structure
 
@@ -49,7 +46,6 @@ sounds.rs: Defines sound system.
 
 7. egui_menu.rs: Contains code for egui implementation.
 
-
 ## Dependencies
 
 1. macroquad: For game rendering, sounds and event handling.
@@ -57,7 +53,6 @@ sounds.rs: Defines sound system.
 2. rand: For random value generation.
 
 3. egui_macroquad: For adding gui debug menu. **NOTE**: You have to downgrade macroquad version to 3.x since egui_macroquad apparently does not seem to work with 4.x version of macroquad.
-
 
 ## Screenshots
 
