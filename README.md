@@ -47,5 +47,3 @@ macroquad: For game rendering and event handling.
 rand: For random value generation.
 
 egui_macroquad: For adding gui debug menu. *NOTE*: You have to downgrade macroquad version to 3.x since egui_macroquad apparently does not seem to work with 4.x version of macroquad.
-
-This game is a fun project for those interested in game development with Rust and provides a base for more complex game mechanics and features.
