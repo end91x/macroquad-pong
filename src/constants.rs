@@ -15,4 +15,4 @@ pub const BG_COLOR: Color = Color::new(0.05, 0.05, 0.14, 1.0);
 pub const PADDLE_COLOR: Color = WHITE;
 pub const BALL_COLOR: Color = WHITE;
 
-pub const FIELD_COLOR: Color = Color::new(0.27, 0.54, 0.80, 1.0);
+pub const FIELD_COLOR: Color = Color::new(0.38, 0.25, 0.47, 1.0);
