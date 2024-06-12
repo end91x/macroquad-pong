@@ -15,10 +15,14 @@ use crate::paddle::Paddle;
 #[macroquad::main(conf)]
 async fn main() {
     // Load the font
-    let font: Font = load_ttf_font("./res/Roboto-Black.ttf").await.unwrap();
+    let font: Font = load_ttf_font("./res/PixelifySans-Regular.ttf")
+        .await
+        .unwrap();
 
     // Load the background music
     let bg_music: Sound = load_sound("./assets/sounds/bg_music.wav").await.unwrap();
+
+    let collision_sound: Sound = load_sound("./assets/sounds/pop3.ogg").await.unwrap();
 
     // Set target fps
     let target_frame_time: f32 = 1. / 60.;
@@ -55,7 +59,7 @@ async fn main() {
         bg_music,
         PlaySoundParams {
             looped: true,
-            volume: 1.,
+            volume: 0.1,
         },
     );
 
@@ -68,7 +72,7 @@ async fn main() {
         paddle_1.movement(KeyCode::W, KeyCode::S);
         paddle_2.movement(KeyCode::Up, KeyCode::Down);
         ball.movement();
-        ball.collision_with_paddles(&paddle_1.rect, &paddle_2.rect);
+        ball.collision_with_paddles(&paddle_1.rect, &paddle_2.rect, collision_sound);
 
         // Check if the ball goes out of the screen (horizontally) and reset ball
         if ball.circle.x + BALL_RADIUS <= 0. {

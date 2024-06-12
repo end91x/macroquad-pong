@@ -1,4 +1,5 @@
 use ::rand::prelude::*;
+use macroquad::audio::{play_sound_once, Sound};
 use macroquad::prelude::*;
 
 use crate::constants::*;
@@ -70,7 +71,7 @@ impl Ball {
     ///
     /// * `paddle_1` - The first paddle rect
     /// * `paddle_2` - The second paddle rect
-    pub fn collision_with_paddles(&mut self, paddle_1: &Rect, paddle_2: &Rect) {
+    pub fn collision_with_paddles(&mut self, paddle_1: &Rect, paddle_2: &Rect, sound: Sound) {
         let ball_rect: Rect = Rect::new(
             self.circle.x - BALL_RADIUS,
             self.circle.y - BALL_RADIUS,
@@ -86,6 +87,7 @@ impl Ball {
             self.dir.y += hit_pos * PADDLE_BOUNCE_ANGLE_FACTOR;
             self.dir *= BALL_SPEED_MULTIPLIER;
             self.circle.x = paddle_1.x + paddle_1.w + BALL_RADIUS;
+            play_sound_once(sound);
         }
 
         // Check for collisions with the second paddle
@@ -96,6 +98,7 @@ impl Ball {
             self.dir.y += hit_pos * PADDLE_BOUNCE_ANGLE_FACTOR;
             self.dir *= BALL_SPEED_MULTIPLIER;
             self.circle.x = paddle_2.x - BALL_RADIUS;
+            play_sound_once(sound);
         }
     }
 
