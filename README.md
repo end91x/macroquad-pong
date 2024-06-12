@@ -60,5 +60,5 @@ sounds.rs: Defines sound system.
 
 ## Screenshots
 
-![pong_1](https://github.com/end91x/macroquad-pong/assets/160602132/3efdce82-3d86-4ea8-a183-e74cb5dbbd26)
+   ![pong_1](https://github.com/end91x/macroquad-pong/assets/160602132/3efdce82-3d86-4ea8-a183-e74cb5dbbd26)
 
