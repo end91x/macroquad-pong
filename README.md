@@ -29,22 +29,9 @@ Simple Graphics: Utilizes basic shapes, colors and sprites.
 
 4. FPS: Currently set to 60 but can be changed.
 
-## Code Structure
+5. Game State Manager
 
-1. main.rs: Contains the game loop and rendering logic.
-
-2. paddle.rs: Defines the Paddle struct and its methods for movement and drawing.
-
-3. ball.rs: Defines the Ball struct with methods for movement, drawing, collision detection, and resetting.
-
-4. egui_menu.rs: Contains code for egui implementation.
-
-5. constants.rs: Stores all game-related constants like dimensions, speeds and colors.
-sounds.rs: Defines sound system.
-
-6. graphics.rs: Defines graphic system.
-
-7. egui_menu.rs: Contains code for egui implementation.
+6. Main Menu
 
 ## Dependencies
 
@@ -57,3 +44,5 @@ sounds.rs: Defines sound system.
 ## Screenshots
 
 ![pong_1](https://github.com/end91x/macroquad-pong/assets/160602132/3efdce82-3d86-4ea8-a183-e74cb5dbbd26)
+![menu](https://github.com/end91x/macroquad-pong/assets/160602132/bc2cb005-37e0-4156-ad26-61e2fcb04054)
+
