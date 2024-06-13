@@ -1,23 +1,50 @@
-use macroquad::audio::{load_sound, Sound};
+use macroquad::audio::{load_sound, stop_sound, Sound};
 use macroquad::prelude::*;
 
 mod ball;
 mod constants;
 mod egui_menu;
+mod game_state;
 mod graphics;
+mod main_menu;
 mod paddle;
 mod sounds;
 
 use crate::ball::Ball;
 use crate::constants::*;
 use crate::egui_menu::init_egui;
+use crate::game_state::GameState;
 use crate::graphics::{draw_field, draw_scores, draw_wall};
+use crate::main_menu::draw_main_menu;
 use crate::paddle::Paddle;
 use crate::sounds::play_music;
 
 /// The main function
 #[macroquad::main(conf)]
 async fn main() {
+    let mut current_state: GameState = GameState::MainMenu;
+
+    loop {
+        match current_state {
+            GameState::MainMenu => {
+                current_state = draw_main_menu().await;
+            }
+            GameState::Game => {
+                current_state = game_loop().await;
+            }
+            GameState::Exit => {
+                break;
+            }
+        }
+    }
+}
+
+/// The game loop
+///
+/// # Returns
+///
+/// * `GameState` - The next state of the game (MainMenu or Exit)
+async fn game_loop() -> GameState {
     // Load the font
     let font: Font = load_ttf_font("./res/PixelifySans-Regular.ttf")
         .await
@@ -92,7 +119,8 @@ async fn main() {
 
         // If either player has won the game, break the loop and exit the game
         if win_condition(&scores) {
-            break;
+            stop_sound(bg_music);
+            return GameState::MainMenu;
         }
 
         // Begin drawing

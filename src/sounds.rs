@@ -6,11 +6,12 @@ pub async fn play_music(sound: Sound) {
         sound,
         PlaySoundParams {
             looped: true,
-            volume: 0.1,
+            volume: 1.0,
         },
     );
 }
 
 pub async fn play_collision_sound(sound: Sound) {
+    // Play the collision sound
     play_sound_once(sound);
 }
